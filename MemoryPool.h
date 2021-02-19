@@ -62,6 +62,7 @@ namespace ace {
         _T* t = (_T*)malloc(sizeof(_T));
         if (t == nullptr) return nullptr;
         new(t)_T();
+        return t;
     }
     
 
