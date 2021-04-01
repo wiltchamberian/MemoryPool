@@ -11,7 +11,7 @@
 #define __MEMORY_POOL_H
 
 namespace ace {
-#define MEMORYSIZ  1024 * 1024 * 16
+#define MEMORYSIZ  1024 * 1024 * 64
 #define	ZONEID	0x1d4a11
 #define MINFRAGMENT	64
 
