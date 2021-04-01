@@ -171,6 +171,7 @@ namespace Sun {
             else if (block->prev_->tag_ == 0 && block->next_->tag_ == 1) {
                 block->prev_->next_ = block->next_;
                 block->prev_->size_ = block->prev_->size_ + block->size_;
+                block->next_->prev_ = block->prev_;
             }
             else if (block->prev_->tag_ == 1 && block->next_->tag_ == 0) {
                 block->next_->freePrev_->freeNext_ = block;
@@ -188,8 +189,6 @@ namespace Sun {
                 nt->tag_ = 0;
                 nt->next_ = block->next_->next_;
                 block->next_->next_->prev_ = nt;
-                nt->prev_->next_ = nt;
-                nt->prev_ = block->prev_;
                 nt->size_ = nt->size_ + block->size_ + block->next_->size_;
                 removeFromFreeList(nt);
                 removeFromFreeList(block->next_);
@@ -197,9 +196,8 @@ namespace Sun {
                 MemoryBlock* tmp = blocklist_.freeNext_;
                 blocklist_.freeNext_ = nt;
                 nt->freePrev_ = &blocklist_;
-                blocklist_.freeNext_ = tmp;
+                nt->freeNext_ = tmp;
                 tmp->freePrev_ = nt;
-                nt->tag_ = 0;
             }
         }
 
